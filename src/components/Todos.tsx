@@ -7,8 +7,15 @@ interface TodoData {
   userId: number;
   id: number;
   title: string;
+  completed?: boolean;
 }
-const Todos: React.FC<TodoData> = ({ userId, id, title }) => {
+
+const Todos: React.FC<TodoData> = ({
+  userId,
+  id,
+  title,
+  completed = false,
+}) => {
   const todos = useSelector((store: any) => store.todoStore.todos);
 
   const dispatch = useDispatch();
@@ -16,17 +23,22 @@ const Todos: React.FC<TodoData> = ({ userId, id, title }) => {
     const todoAfterDelete = todos.filter((todo: TodoData) => todo.id !== id);
     dispatch(fetchTodos(todoAfterDelete));
   };
+
   const handleCompleteTodoHandler = (id: number) => {
     console.log("update todo", id);
     dispatch(updateTodo(id));
   };
+
+  const currentTodo = todos.find((todo: TodoData) => todo.id === id);
+  const isCompleted = currentTodo?.completed || false;
+
   return (
     <div className="todo">
       <h2 className="text">{title}</h2>
       <input
         type="checkbox"
-        value="gregory"
-        onClick={() => handleCompleteTodoHandler(id)}
+        checked={isCompleted}
+        onChange={() => handleCompleteTodoHandler(id)}
       />
       <div>
         <button onClick={() => handleDeleteTodo(id)}>delete</button>
