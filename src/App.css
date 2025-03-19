@@ -1,0 +1,35 @@
+.todo {
+  display: flex;
+  width: 200px;
+  border: solid rgb(158, 156, 156) 1px;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.button-container {
+  width: 200px;
+}
+
+.todo-parent {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-add {
+  display: flex;
+  padding: 10px;
+}
+
+.todo-list-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.highlight-btn {
+  background-color: #646cff;
+  color: white;
+}
