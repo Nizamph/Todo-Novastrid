@@ -15,7 +15,7 @@ const TodoContainer = () => {
   const todos = useSelector((store: any) => store.todoStore.todos);
   const [renderTodos, setRenderTodos] = useState<TodoData[]>(todos);
   const [completedTask, setCompletedTask] = useState<TodoData[]>([]);
-  const [currentTab, setCurrentTab] = useState<string>("");
+  const [currentTab, setCurrentTab] = useState<string>("All");
   const dispatch = useDispatch();
 
   console.log("todos from redux", todos);
@@ -74,6 +74,11 @@ const TodoContainer = () => {
     setCurrentTab("pending");
   };
 
+  const handleAllTodos = () => {
+    setRenderTodos(todos);
+    setCurrentTab("All");
+  };
+
   return (
     <div className="todo-parent">
       <div className="todo-add">
@@ -81,6 +86,12 @@ const TodoContainer = () => {
         <button onClick={todoSubmitHandler}>Add</button>
       </div>
       <div className="todo-list-buttons">
+        <button
+          onClick={() => handleAllTodos()}
+          className={currentTab == "All" ? "highlight-btn" : ""}
+        >
+          All Todos
+        </button>
         <button
           onClick={() => handleRenderCompleteTodos()}
           className={currentTab == "completed" ? "highlight-btn" : ""}
