@@ -25,6 +25,16 @@ const TodoContainer = () => {
     getTodos();
   }, []);
 
+  useEffect(() => {
+    if (currentTab === "All") {
+      setRenderTodos(todos);
+    } else if (currentTab == "pending") {
+      handlePendingTodos();
+    } else {
+      handleRenderCompleteTodos();
+    }
+  }, [todos, renderTodos, currentTab]);
+
   const getTodos = async () => {
     try {
       const todos = await fetch(GET_TODO);
@@ -112,19 +122,12 @@ const TodoContainer = () => {
           <Todos title={td.title} userId={td.userId} id={td.id} key={td.id} />
         ))}
       </div> */}
-      {renderTodos.length > 0 ? (
-        <>
-          {renderTodos.map((td: TodoData) => (
-            <Todos title={td.title} userId={td.userId} id={td.id} key={td.id} />
-          ))}
-        </>
-      ) : (
-        <>
-          {todos.map((td: TodoData) => (
-            <Todos title={td.title} userId={td.userId} id={td.id} key={td.id} />
-          ))}
-        </>
-      )}
+
+      <>
+        {renderTodos.map((td: TodoData) => (
+          <Todos title={td.title} userId={td.userId} id={td.id} key={td.id} />
+        ))}
+      </>
     </div>
   );
 };
