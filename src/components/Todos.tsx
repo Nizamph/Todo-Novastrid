@@ -20,8 +20,9 @@ const Todos: React.FC<TodoData> = ({
 
   const dispatch = useDispatch();
   const handleDeleteTodo = (id: number) => {
-    const todoAfterDelete = todos.filter((todo: TodoData) => todo.id !== id);
-    dispatch(fetchTodos(todoAfterDelete));
+    // const todoAfterDelete = todos.filter((todo: TodoData) => todo.id !== id);
+    // dispatch(fetchTodos(todoAfterDelete));
+    dispatch(deleteTodo(id));
   };
 
   const handleCompleteTodoHandler = (id: number) => {
